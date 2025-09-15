@@ -210,7 +210,7 @@ body {
 
 .hero-title {
     font-family: 'Cinzel Decorative', serif;
-    font-size: 4.5rem;
+    font-size: 3.5rem;
     font-weight: 900;
     margin-bottom: 20px;
     position: relative;
@@ -330,12 +330,23 @@ body {
 
 .hero-server {
     font-size: 1.4rem;
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 50px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    background: linear-gradient(135deg, 
+        rgba(91, 14, 5, 0.9) 0%, 
+        rgba(128, 111, 91, 0.9) 50%, 
+        rgba(91, 14, 5, 0.9) 100%);
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 12px 20px;
+    display: inline-block;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(250, 185, 98, 0.3);
 }
 
 .hero-stats {
@@ -466,6 +477,126 @@ body {
 section {
     padding: 120px 0;
     position: relative;
+}
+
+/* Alliance Stamp on Sections */
+.section-stamp {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('Logos/Stamp.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.9;
+    z-index: 10;
+    animation: stampGlow 3s ease-in-out infinite alternate;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-stamp:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    animation: none;
+}
+
+@keyframes stampGlow {
+    0% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+/* Tooltip for stamp */
+.section-stamp::before {
+    content: 'Solum qui nobiscum steterunt, nobiscum stabunt.';
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    background: var(--primary-color);
+    color: var(--accent-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    border: 2px solid var(--accent-color);
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    max-width: 300px;
+    white-space: normal;
+}
+
+.section-stamp::after {
+    content: '';
+    position: absolute;
+    bottom: 90%;
+    right: 20px;
+    border: 8px solid transparent;
+    border-top-color: var(--primary-color);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.section-stamp:hover::before,
+.section-stamp:active::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.section-stamp:hover::after,
+.section-stamp:active::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Responsive stamp sizing */
+@media (max-width: 768px) {
+    .section-stamp {
+        width: 60px;
+        height: 60px;
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .section-stamp::before {
+        font-size: 0.8rem;
+        padding: 10px 12px;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-stamp {
+        width: 50px;
+        height: 50px;
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    .section-stamp::before {
+        font-size: 0.7rem;
+        padding: 8px 10px;
+        max-width: 200px;
+    }
 }
 
 
@@ -953,8 +1084,168 @@ section {
 
 .leaders-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Leader Flip Cards */
+.leader-card {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.leader-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.leader-card:hover .leader-card-inner {
+    transform: rotateY(180deg);
+}
+
+.leader-card-front,
+.leader-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    box-shadow: var(--medieval-shadow);
+    border: 3px solid var(--accent-color);
+}
+
+.leader-card-front {
+    background: var(--gradient-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.leader-card-back {
+    background: var(--gradient-secondary);
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.leader-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    object-fit: cover;
+    margin: 0 auto 20px auto;
+    display: block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.leader-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.leader-role {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.leader-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    text-align: left;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.leader-description p {
+    margin-bottom: 12px;
+    text-align: justify;
+}
+
+.leader-description p:last-child {
+    margin-bottom: 0;
+}
+
+.flip-hint {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Responsive design for leader cards */
+@media (max-width: 768px) {
+    .leaders-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .leader-card {
+        height: 350px;
+    }
+    
+    .leader-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .leader-name {
+        font-size: 1.3rem;
+    }
+    
+    .leader-description {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .leaders-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .leader-card {
+        height: 320px;
+    }
+    
+    .leader-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .leader-name {
+        font-size: 1.2rem;
+    }
+    
+    .leader-description {
+        font-size: 0.85rem;
+    }
 }
 
 .leader-card {
