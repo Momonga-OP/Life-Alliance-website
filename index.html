@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Life Alliance - Dofus Touch Blair Server</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="Logos/Alliance logo.png" alt="Life Alliance Logo" class="nav-logo-img">
+                <span>Life Alliance</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#guilds" class="nav-link">Guilds</a></li>
+                <li><a href="#phases" class="nav-link">Phases</a></li>
+                <li><a href="#leaders" class="nav-link">Leaders</a></li>
+                <li><a href="#events" class="nav-link">Events</a></li>
+                <li><a href="#discord" class="nav-link">Discord</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="stars"></div>
+            <div class="nebula"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <div class="true-focus-container">
+                        <div class="true-focus-text">LIFE ALLIANCE</div>
+                        <div class="true-focus-blur">LIFE ALLIANCE</div>
+                        <div class="true-focus-border"></div>
+                        <div class="true-focus-highlight"></div>
+                    </div>
+                </h1>
+                <p class="hero-subtitle">The Biggest English Speaking Alliance</p>
+                <p class="hero-server">Dofus Touch - Blair Server</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" id="memberCount">0</span>
+                        <span class="stat-label">Active Members</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="guildCount">0</span>
+                        <span class="stat-label">Guilds</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" id="onlineCount">0</span>
+                        <span class="stat-label">Online Now</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="https://discord.gg/W3FBPErMSB" target="_blank" class="btn btn-primary">
+                        <i class="fab fa-discord"></i>
+                        Join Discord
+                    </a>
+                    <a href="#about" class="btn btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>LIFE Alliance stands as the home of the international community on the Blair Server where English, Spanish, French, Italian, and more players come together under one banner. We are more than just an alliance: we are a family built on friendship, teamwork, and the will to keep Blair diverse and alive.</p>
+                    
+                    <p>Our mission is to create a space where every guild has a voice, every member has a role, and every fight is an opportunity to grow stronger together. Whether in PvP, PvM, or AvA, LIFE Alliance is about more than winning it's about belonging.</p>
+                    
+                    <div class="slogan-container">
+                        <p class="slogan-text">Your guild deserves more than just an alliance.</p>
+                        <p class="slogan-text">It deserves a home. It deserves LIFE.</p>
+                        <div class="medieval-slogan">Solum qui nobiscum steterunt, nobiscum stabunt.</div>
+                    </div>
+                    
+                    <h3>Our Vision</h3>
+                    <p>We strive to:</p>
+                    <ul class="vision-list">
+                        <li>Keep the international spirit alive in a server dominated by single-language groups.</li>
+                        <li>Foster a community where activity, fairness, and respect are the foundations.</li>
+                        <li>Compete in PvP, PvM, and AvA not only to win, but to show that diversity is strength.</li>
+                        <li>Create an environment where every guild can grow, every leader can contribute, and every player can feel proud to wear the LIFE tag.</li>
+                    </ul>
+                </div>
+                <div class="about-features">
+                    <div class="feature-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>International Unity</h4>
+                        <p>Bringing together players from all languages and cultures</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-home"></i>
+                        <h4>A True Home</h4>
+                        <p>More than an alliance - a family where everyone belongs</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-fist-raised"></i>
+                        <h4>Diversity is Strength</h4>
+                        <p>Proving that different backgrounds create stronger teams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guilds Section -->
+    <section id="guilds" class="guilds">
+        <div class="container">
+            <h2 class="section-title">Our Guilds</h2>
+            <div class="guilds-grid" id="guildsGrid">
+                <!-- Guilds directly in HTML -->
+                <div class="guild-card">
+                        <img src="Guilds logo and names/- Amanecer -.png" alt="Amanecer logo" class="guild-logo-img">
+                        <h3 class="guild-name">Amanecer</h3>
+                        <p class="guild-members">180 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/-A-Vesperion-.png" alt="Vesperion logo" class="guild-logo-img">
+                    <h3 class="guild-name">Vesperion</h3>
+                    <p class="guild-members">165 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Demigods.png" alt="Demigods logo" class="guild-logo-img">
+                    <h3 class="guild-name">Demigods</h3>
+                    <p class="guild-members">200 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Enderun.png" alt="Enderun logo" class="guild-logo-img">
+                    <h3 class="guild-name">Enderun</h3>
+                    <p class="guild-members">175 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Equilibrium Vita.png" alt="Equilibrium Vita logo" class="guild-logo-img">
+                    <h3 class="guild-name">Equilibrium Vita</h3>
+                    <p class="guild-members">160 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Family Business.png" alt="Family Business logo" class="guild-logo-img">
+                    <h3 class="guild-name">Family Business</h3>
+                    <p class="guild-members">185 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/FrenchLEADER.png" alt="FrenchLEADER logo" class="guild-logo-img">
+                    <h3 class="guild-name">FrenchLEADER</h3>
+                    <p class="guild-members">190 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Guardians.png" alt="Guardians logo" class="guild-logo-img">
+                    <h3 class="guild-name">Guardians</h3>
+                    <p class="guild-members">170 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/I M P E R I V M.png" alt="IMPERIVM logo" class="guild-logo-img">
+                    <h3 class="guild-name">IMPERIVM</h3>
+                    <p class="guild-members">195 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Italians.png" alt="Italians logo" class="guild-logo-img">
+                    <h3 class="guild-name">Italians</h3>
+                    <p class="guild-members">155 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Krosmic Fluxx.png" alt="Krosmic Fluxx logo" class="guild-logo-img">
+                    <h3 class="guild-name">Krosmic Fluxx</h3>
+                    <p class="guild-members">150 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Nemesis.png" alt="Nemesis logo" class="guild-logo-img">
+                    <h3 class="guild-name">Nemesis</h3>
+                    <p class="guild-members">180 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Nomads.png" alt="Nomads logo" class="guild-logo-img">
+                    <h3 class="guild-name">Nomads</h3>
+                    <p class="guild-members">145 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/perfect guild.png" alt="Perfect Guild logo" class="guild-logo-img">
+                    <h3 class="guild-name">Perfect Guild</h3>
+                    <p class="guild-members">200 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Punishment.png" alt="Punishment logo" class="guild-logo-img">
+                    <h3 class="guild-name">Punishment</h3>
+                    <p class="guild-members">165 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/SAQ SELECTION.png" alt="SAQ SELECTION logo" class="guild-logo-img">
+                    <h3 class="guild-name">SAQ SELECTION</h3>
+                    <p class="guild-members">175 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Sausage Fingers Society.png" alt="Sausage Fingers Society logo" class="guild-logo-img">
+                    <h3 class="guild-name">Sausage Fingers Society</h3>
+                    <p class="guild-members">140 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/sparta logoo.png" alt="Sparta logo" class="guild-logo-img">
+                    <h3 class="guild-name">Sparta</h3>
+                    <p class="guild-members">190 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/The Trenches.png" alt="The Trenches logo" class="guild-logo-img">
+                    <h3 class="guild-name">The Trenches</h3>
+                    <p class="guild-members">160 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Thieves.png" alt="Thieves logo" class="guild-logo-img">
+                    <h3 class="guild-name">Thieves</h3>
+                    <p class="guild-members">155 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Tight.png" alt="Tight logo" class="guild-logo-img">
+                    <h3 class="guild-name">Tight</h3>
+                    <p class="guild-members">145 Members</p>
+                </div>
+                <div class="guild-card">
+                    <img src="Guilds logo and names/Vendetta.png" alt="Vendetta logo" class="guild-logo-img">
+                    <h3 class="guild-name">Vendetta</h3>
+                    <p class="guild-members">170 Members</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phases Section -->
+    <section id="phases" class="phases">
+        <div class="container">
+            <h2 class="section-title">Alliance Phases</h2>
+            <div class="phases-timeline">
+                <div class="phase-item current">
+                    <div class="phase-marker"></div>
+                    <div class="phase-content">
+                        <h3>Phase 1 – Foundation</h3>
+                        <div class="phase-focus">Focus: Stabilize & Engage</div>
+                        <ul class="phase-goals">
+                            <li>Strengthen leadership presence (introduce the leadership team clearly)</li>
+                            <li>Increase activity through consistent events (lotteries, PvM/PvP, features)</li>
+                            <li>Encourage guild leaders to show visibility in Discord and game</li>
+                            <li>Build identity: "LIFE = International Home of Blair"</li>
+                        </ul>
+                        <div class="phase-goal">Goal: Reignite activity and stabilize at 100–120 peak actives</div>
+                        <span class="phase-status">In Progress</span>
+                    </div>
+                </div>
+                <div class="phase-item upcoming">
+                    <div class="phase-marker"></div>
+                    <div class="phase-content">
+                        <h3>Phase 2 – Expansion</h3>
+                        <div class="phase-focus">Focus: Recruitment & Growth</div>
+                        <ul class="phase-goals">
+                            <li>Attract new guilds with bilingual recruitment (ENG/SPA/FR)</li>
+                            <li>Form soft partnerships with mid size guilds</li>
+                            <li>Promote LIFE's international uniqueness across forums and Discords</li>
+                            <li>Use big events (like your PvP/PvM with 55mk prize) as recruitment showcases</li>
+                        </ul>
+                        <div class="phase-goal">Goal: Grow to 5k+ members across all guilds, visible as Blair's international hub</div>
+                        <span class="phase-status">Upcoming</span>
+                    </div>
+                </div>
+                <div class="phase-item upcoming">
+                    <div class="phase-marker"></div>
+                    <div class="phase-content">
+                        <h3>Phase 3 – Coordination</h3>
+                        <div class="phase-focus">Focus: Training & Structure</div>
+                        <ul class="phase-goals">
+                            <li>Form strike teams (8–16 Teams) that can be reliably mobilized</li>
+                            <li>Run mock AvAs and practice drills with leadership callers</li>
+                            <li>Establish clear communication channels (Discord squads, AvA voice rooms)</li>
+                            <li>Rotate leadership duties (events, recruitment, PvP organization)</li>
+                        </ul>
+                        <div class="phase-goal">Goal: 250 reliable fighters, 3 trained squads, council-led structure working smoothly</div>
+                        <span class="phase-status">Upcoming</span>
+                    </div>
+                </div>
+                <div class="phase-item upcoming">
+                    <div class="phase-marker"></div>
+                    <div class="phase-content">
+                        <h3>Phase 4 – AvA Relaunch</h3>
+                        <div class="phase-focus">Focus: Visibility & War Readiness</div>
+                        <ul class="phase-goals">
+                            <li>Launch a hype campaign ("LIFE STRIKES BACK")</li>
+                            <li>Organize 2 final mock AvAs with mandatory participation</li>
+                            <li>Relaunch with a major AvA attempt (aim for 400–500 fighters)</li>
+                            <li>Publicly recap the war, even if we lose → visibility builds momentum</li>
+                        </ul>
+                        <div class="phase-goal">Goal: Successful return to AvA, LIFE recognized as a serious force</div>
+                        <span class="phase-status">Upcoming</span>
+                    </div>
+                </div>
+                <div class="phase-item upcoming">
+                    <div class="phase-marker"></div>
+                    <div class="phase-content">
+                        <h3>Phase 5 – Legacy</h3>
+                        <div class="phase-focus">Focus: Sustain & Evolve</div>
+                        <ul class="phase-goals">
+                            <li>Establish a cadence (1 AvA every 2–3 weeks)</li>
+                            <li>Mentor smaller guilds to secure loyalty and pipeline growth</li>
+                            <li>Celebrate community with monthly awards (best fighter, recruiter, etc.)</li>
+                            <li>Keep Discord active with ongoing mini events (lotteries, Easter eggs, debate)</li>
+                        </ul>
+                        <div class="phase-goal">Goal: LIFE becomes the long term international alliance of Blair, known for both community and competitiveness</div>
+                        <span class="phase-status">Upcoming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaders Section -->
+    <section id="leaders" class="leaders">
+        <div class="container">
+            <h2 class="section-title">Alliance Leadership</h2>
+            <div class="leaders-grid" id="leadersGrid">
+                <!-- Leaders will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events directly in HTML -->
+                <div class="event-card">
+                    <div class="event-date">September 16th</div>
+                    <h3 class="event-title">The Rise of the Alliance - First PVP/PVM Event</h3>
+                    <p class="event-description">We will be launching our very first PVP/PVM Event as the Life Alliance on the new server. This is a historic moment for our alliance as we establish our presence and showcase our strength to the Blair Server community.</p>
+                    <div class="event-download">
+                        <a href="Events/Alliance Life PVP PVm Event.pdf" download class="download-btn">
+                            <i class="fas fa-download"></i>
+                            Download Event Details (PDF)
+                        </a>
+                    </div>
+                    <span class="event-status upcoming">Upcoming</span>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">Every Friday at 21:00 (Dofus Time)</div>
+                    <h3 class="event-title">Weekly Lottery Event</h3>
+                    <p class="event-description">Every Friday at 21:00 (Dofus time), our Discord bot will post a message in the server. All you need to do is react with a ✅ and you're in! The bot will randomly pick a winner shortly after. Prizes range from 1mk to 100mk!</p>
+                    <div class="event-download">
+                        <a href="Events/LIFE Alliance Weekly Lottery.pdf" download class="download-btn">
+                            <i class="fas fa-download"></i>
+                            Download Lottery Rules (PDF)
+                        </a>
+                    </div>
+                    <span class="event-status ongoing">Ongoing</span>
+                </div>
+                
+                <div class="event-card">
+                    <div class="event-date">Daily</div>
+                    <h3 class="event-title">Debate Me Event</h3>
+                    <p class="event-description">Every day, our Discord bot (Spectra) posts a debate prompt in the #debate-me channel. Topics are always related to the game, and members are free to reply with their opinions, share experiences, and use examples from the game.</p>
+                    <div class="event-download">
+                        <a href="Events/Life Alliance Debate me.pdf" download class="download-btn">
+                            <i class="fas fa-download"></i>
+                            Download Debate Rules (PDF)
+                        </a>
+                    </div>
+                    <span class="event-status ongoing">Ongoing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discord Section -->
+    <section id="discord" class="discord">
+        <div class="container">
+            <div class="discord-content">
+                <div class="discord-text">
+                    <h2>Join Our Community</h2>
+                    <p>Connect with fellow alliance members, participate in discussions, and stay updated with the latest news and events.</p>
+                    <div class="discord-stats">
+                        <div class="discord-stat">
+                            <i class="fab fa-discord"></i>
+                            <span>250+ Members</span>
+                        </div>
+                        <div class="discord-stat">
+                            <i class="fas fa-comments"></i>
+                            <span>24/7 Chat</span>
+                        </div>
+                        <div class="discord-stat">
+                            <i class="fas fa-calendar"></i>
+                            <span>Event Updates</span>
+                        </div>
+                    </div>
+                    <a href="https://discord.gg/W3FBPErMSB" target="_blank" class="btn btn-discord">
+                        <i class="fab fa-discord"></i>
+                        Join Discord Server
+                    </a>
+                </div>
+                <div class="discord-visual">
+                    <div class="discord-icon">
+                        <i class="fab fa-discord"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="Logos/Alliance logo.png" alt="Life Alliance Logo" class="footer-logo-img">
+                    <span>Life Alliance</span>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#guilds">Guilds</a>
+                    <a href="#discord">Discord</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://discord.gg/W3FBPErMSB" target="_blank"><i class="fab fa-discord"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Life Alliance. All rights reserved. | Dofus Touch - Blair Server - Latif</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
