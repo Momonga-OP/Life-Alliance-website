@@ -1,6 +1,73 @@
+
+// Breadcrumb Navigation Functionality
+function initBreadcrumbNavigation() {
+    const breadcrumbNav = document.getElementById('breadcrumbNav');
+    const currentPage = document.getElementById('currentPage');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (!breadcrumbNav || !currentPage) return;
+    
+    // Show breadcrumb when not on home section
+    function updateBreadcrumb() {
+        const currentSection = getCurrentSection();
+        if (currentSection && currentSection !== 'home') {
+            breadcrumbNav.style.display = 'block';
+            currentPage.textContent = currentSection.charAt(0).toUpperCase() + currentSection.slice(1);
+        } else {
+            breadcrumbNav.style.display = 'none';
+        }
+    }
+    
+    function getCurrentSection() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.scrollY + 100;
+        
+        for (let section of sections) {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                return section.id;
+            }
+        }
+        return 'home';
+    }
+    
+    // Update breadcrumb on scroll
+    window.addEventListener('scroll', updateBreadcrumb);
+    
+    // Update breadcrumb on nav link click
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(updateBreadcrumb, 100);
+        });
+    });
+    
+    // Initial update
+    updateBreadcrumb();
+}
+
+// Sticky Navigation
+function initStickyNavigation() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            navbar.classList.add('sticky');
+        } else {
+            navbar.classList.remove('sticky');
+        }
+    });
+}
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing website...');
+    
+    // Initialize new features
+    initBreadcrumbNavigation();
+    initStickyNavigation();
     
     // DOM Elements
     const hamburger = document.querySelector('.hamburger');

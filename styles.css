@@ -24,6 +24,128 @@
     --medieval-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
+
+/* Mobile-First Design Improvements */
+@media (max-width: 480px) {
+    /* Better mobile typography */
+    body {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        line-height: 1.1;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+        line-height: 1.2;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+        line-height: 1.3;
+    }
+    
+    p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+    }
+    
+    /* Improved mobile spacing */
+    .container {
+        padding: 0 15px;
+    }
+    
+    /* Better mobile buttons */
+    .btn {
+        font-size: 0.9rem;
+        padding: 12px 20px;
+        min-height: 44px; /* Touch-friendly */
+    }
+    
+    /* Better mobile forms */
+    input, textarea, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 12px;
+        min-height: 44px;
+    }
+    
+    /* Better mobile navigation */
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: rgba(26, 15, 10, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        transition: left 0.3s ease;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 20px 0;
+    }
+    
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 15px 30px;
+        display: block;
+        text-align: center;
+        min-width: 200px;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 481px) and (max-width: 768px) {
+    .container {
+        padding: 0 25px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .btn {
+        font-size: 1rem;
+        padding: 14px 24px;
+    }
+}
+
+/* Desktop optimizations */
+@media (min-width: 769px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    /* Better desktop spacing */
+    section {
+        padding: 80px 0;
+    }
+    
+    /* Improved desktop navigation */
+    .nav-menu {
+        display: flex;
+    }
+    
+    .hamburger {
+        display: none;
+    }
+}
+
 body {
     font-family: 'Cinzel', 'Times New Roman', serif;
     background: var(--dark-bg);
@@ -34,6 +156,99 @@ body {
         radial-gradient(circle at 20% 50%, rgba(91, 14, 5, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(250, 185, 98, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 40% 80%, rgba(128, 111, 91, 0.1) 0%, transparent 50%);
+}
+
+/* Typography Improvements */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-rendering: optimizeLegibility;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 800;
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 700;
+}
+
+h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 600;
+}
+
+p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    color: var(--text-secondary);
+}
+
+/* Improved Text Contrast */
+.text-high-contrast {
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.text-medium-contrast {
+    color: #f4f1e8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.text-low-contrast {
+    color: #d4c4a8;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Better Link Styling */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a:hover {
+    color: var(--text-primary);
+    text-shadow: 0 0 8px rgba(250, 185, 98, 0.6);
+}
+
+a:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Improved Button Typography */
+.btn {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* Better Form Typography */
+input, textarea, select {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+label {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: block;
 }
 
 .container {
@@ -679,6 +894,104 @@ html {
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
+}
+
+/* Sticky Navigation */
+.navbar.sticky {
+    background: rgba(26, 15, 10, 0.98);
+    padding: 10px 0;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Breadcrumb Navigation */
+.breadcrumb-nav {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: rgba(26, 15, 10, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(250, 185, 98, 0.2);
+    transition: all 0.3s ease;
+}
+
+.breadcrumb-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.breadcrumb-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 8px;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.breadcrumb-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.breadcrumb-link:hover {
+    color: var(--primary-color);
+    background: rgba(250, 185, 98, 0.1);
+    transform: translateX(2px);
+}
+
+.breadcrumb-item.current span {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    background: rgba(250, 185, 98, 0.1);
+    border-radius: 4px;
+}
+
+.breadcrumb-separator {
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Mobile Breadcrumb */
+@media (max-width: 768px) {
+    .breadcrumb-nav {
+        top: 70px;
+        padding: 6px 0;
+    }
+    
+    .breadcrumb-container {
+        padding: 0 15px;
+    }
+    
+    .breadcrumb-link,
+    .breadcrumb-item.current span {
+        font-size: 0.8rem;
+        padding: 3px 6px;
+    }
+    
+    .breadcrumb-link span {
+        display: none;
+    }
 }
 
 .hamburger {
@@ -1432,15 +1745,17 @@ html {
 }
 
 .btn-discord {
-    background: #5865f2;
-    color: white;
-    border: 2px solid #5865f2;
-    box-shadow: 0 4px 8px rgba(88, 101, 242, 0.3);
+    background: var(--gradient-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--medieval-shadow);
 }
 
 .btn-discord:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(88, 101, 242, 0.5);
+    box-shadow: var(--shadow-glow-strong);
+    background: var(--gradient-accent);
+    color: var(--primary-color);
 }
 
 .scroll-indicator {
@@ -1510,8 +1825,9 @@ section {
 .section-stamp::before {
     content: 'Solum qui nobiscum steterunt, nobiscum stabunt.';
     position: absolute;
-    bottom: 100%;
-    right: 0;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%) translateX(10px);
     background: var(--primary-color);
     color: var(--accent-color);
     padding: 12px 16px;
@@ -1521,7 +1837,6 @@ section {
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     transition: all 0.3s ease;
     z-index: 1000;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
@@ -1530,18 +1845,19 @@ section {
     text-align: center;
     max-width: 300px;
     white-space: normal;
+    margin-right: 15px;
 }
 
 .section-stamp::after {
     content: '';
     position: absolute;
-    bottom: 90%;
-    right: 20px;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%) translateX(10px);
     border: 8px solid transparent;
-    border-top-color: var(--primary-color);
+    border-left-color: var(--primary-color);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     transition: all 0.3s ease;
     z-index: 1000;
 }
@@ -1550,14 +1866,14 @@ section {
 .section-stamp:active::before {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(-50%) translateX(0);
 }
 
 .section-stamp:hover::after,
 .section-stamp:active::after {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(-50%) translateX(0);
 }
 
 /* Responsive stamp sizing */
@@ -1573,6 +1889,9 @@ section {
         font-size: 0.8rem;
         padding: 10px 12px;
         max-width: 250px;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
     }
 }
 
@@ -1588,6 +1907,9 @@ section {
         font-size: 0.7rem;
         padding: 8px 10px;
         max-width: 200px;
+        right: 100%;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
     }
 }
 
@@ -1807,6 +2129,20 @@ section {
     color: var(--accent-color);
     margin-bottom: 25px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.feature-icon {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 25px;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+    transition: all 0.3s ease;
+}
+
+.feature-icon:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(250, 185, 98, 0.6));
 }
 
 .feature-card h4 {
@@ -2929,7 +3265,7 @@ section {
 .discord-icon {
     width: 250px;
     height: 250px;
-    background: #5865f2;
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2937,10 +3273,26 @@ section {
     font-size: 8rem;
     color: white;
     box-shadow: 
-        0 0 50px rgba(88, 101, 242, 0.5),
+        0 0 50px rgba(250, 185, 98, 0.6),
         var(--medieval-shadow);
     animation: float 3s ease-in-out infinite;
     border: 4px solid var(--accent-color);
+}
+
+.discord-logo-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 20px rgba(250, 185, 98, 0.8));
+    border: 3px solid var(--accent-color);
+}
+
+.discord-logo-img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 30px rgba(250, 185, 98, 1));
+    border-color: var(--primary-color);
 }
 
 @keyframes float {
@@ -3432,6 +3784,11 @@ section {
         height: 200px;
         font-size: 6rem;
     }
+    
+    .discord-logo-img {
+        width: 160px;
+        height: 160px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -3627,6 +3984,11 @@ section {
         width: 150px;
         height: 150px;
         font-size: 4rem;
+    }
+    
+    .discord-logo-img {
+        width: 120px;
+        height: 120px;
     }
     
     .medieval-slogan {

@@ -42,7 +42,10 @@
     <div class="scroll-progress" id="scrollProgress"></div>
     
     <!-- Dofus Touch Time Clock -->
-    <div id="timeDisplay" style="position: fixed; top: 100px; right: 20px; z-index: 9999; background: linear-gradient(135deg, #1a1a1a, #2d2d2d); color: #faba62; padding: 4px 8px; font-size: 7px; font-weight: 600; border: 1px solid #faba62; border-radius: 3px; font-family: 'Cinzel', serif; text-shadow: 0 0 5px rgba(250, 186, 98, 0.5); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);">Loading...</div>
+    <div id="timeDisplay" style="position: fixed; top: 100px; right: 20px; z-index: 9999; background: linear-gradient(135deg, #1a1a1a, #2d2d2d); color: #faba62; padding: 6px 12px; font-size: 10px; font-weight: 600; border: 1px solid #faba62; border-radius: 4px; font-family: 'Cinzel', serif; text-shadow: 0 0 8px rgba(250, 186, 98, 0.5); box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3); display: flex; align-items: center; gap: 6px;">
+        <img src="Logos/Hour glass.png" alt="Time" style="width: 14px; height: 14px; filter: drop-shadow(0 0 4px rgba(250, 186, 98, 0.5));">
+        <span>Loading...</span>
+    </div>
     
     <!-- Navigation -->
     <nav class="navbar">
@@ -66,6 +69,26 @@
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb-nav" id="breadcrumbNav" style="display: none;">
+        <div class="breadcrumb-container">
+            <ol class="breadcrumb-list">
+                <li class="breadcrumb-item">
+                    <a href="#home" class="breadcrumb-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-separator">
+                    <i class="fas fa-chevron-right"></i>
+                </li>
+                <li class="breadcrumb-item current">
+                    <span id="currentPage">Home</span>
+                </li>
+            </ol>
         </div>
     </nav>
 
@@ -149,20 +172,20 @@
                 </div>
                 <div class="about-features">
                     <div class="feature-card">
-                        <i class="fas fa-globe"></i>
+                        <img src="Logos/earth.png" alt="International Unity" class="feature-icon">
                         <h4>International Unity</h4>
                         <p>Bringing together players from all languages and cultures</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-home"></i>
+                        <img src="Logos/House.png" alt="A True Home" class="feature-icon">
                         <h4>A True Home</h4>
                         <p>More than an alliance - a family where everyone belongs</p>
                     </div>
                     <div class="feature-card">
-                        <i class="fas fa-fist-raised"></i>
+                        <img src="Logos/Shield.png" alt="Diversity is Strength" class="feature-icon">
                         <h4>Diversity is Strength</h4>
                         <p>Proving that different backgrounds create stronger teams</p>
-                </div>
+                    </div>
             </div>
         </div>
     </section>
@@ -576,7 +599,7 @@
                 </div>
                 <div class="discord-visual">
                     <div class="discord-icon">
-                        <i class="fab fa-discord"></i>
+                        <img src="Logos/Discord logo.png" alt="Life Alliance Logo" class="discord-logo-img">
                 </div>
             </div>
         </div>
