@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const backToTop = document.getElementById('backToTop');
+    const dofusTime = document.getElementById('dofusTime');
 
     // Mobile Navigation Toggle
     if (hamburger && navMenu) {
@@ -24,6 +27,101 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Scroll Progress Bar
+    function updateScrollProgress() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        
+        if (scrollProgress) {
+            scrollProgress.style.width = scrollPercent + '%';
+        }
+    }
+
+    // Back to Top Button
+    function toggleBackToTop() {
+        if (backToTop) {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+    }
+
+    // Back to Top functionality
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Active Navigation Link
+    function updateActiveNavLink() {
+        const sections = document.querySelectorAll('section[id]');
+        const scrollPos = window.pageYOffset + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            const navLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLink) {
+                    navLink.classList.add('active');
+                }
+            }
+        });
+    }
+
+    // Scroll event listeners
+    window.addEventListener('scroll', () => {
+        updateScrollProgress();
+        toggleBackToTop();
+        updateActiveNavLink();
+    });
+
+    // Medieval Particles
+    function createMedievalParticles() {
+        const particlesContainer = document.getElementById('medievalParticles');
+        if (!particlesContainer) return;
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'medieval-particle';
+            
+            // Random position and properties
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 8) + 's';
+            
+            particlesContainer.appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 12000);
+        }
+
+        // Create initial particles
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createParticle, i * 500);
+        }
+
+        // Continue creating particles
+        setInterval(createParticle, 2000);
+    }
+
+    // Initialize medieval particles
+    createMedievalParticles();
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -57,6 +155,33 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCounter();
     }
 
+    // Dynamic online counter that changes every 10 seconds
+    let onlineCounterStarted = false;
+    
+    function startDynamicOnlineCounter() {
+        if (onlineCounterStarted) return; // Prevent multiple instances
+        onlineCounterStarted = true;
+        
+        const onlineElement = document.getElementById('onlineCount');
+        if (!onlineElement) return;
+
+        function updateOnlineCount() {
+            // Generate random number between 90-150
+            const randomCount = Math.floor(Math.random() * (150 - 90 + 1)) + 90;
+            
+            console.log(`Updating online count to: ${randomCount}`);
+            
+            // Animate the change
+            animateCounter(onlineElement, randomCount, 1000);
+        }
+
+        // Update immediately
+        updateOnlineCount();
+        
+        // Update every 10 seconds
+        setInterval(updateOnlineCount, 10000);
+    }
+
     // Intersection Observer for animations
     const observerOptions = {
         threshold: 0.1,
@@ -72,7 +197,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (entry.target.classList.contains('hero-stats')) {
                     animateCounter(document.getElementById('memberCount'), 3595);
                     animateCounter(document.getElementById('guildCount'), 22);
-                    animateCounter(document.getElementById('onlineCount'), 100);
+                    // Start dynamic online counter instead of fixed value
+                    startDynamicOnlineCounter();
                 }
             }
         });
@@ -424,7 +550,282 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
     document.head.appendChild(style);
 
+    // Initialize contact form
+    initializeContactForm();
+    
     // Initialize the website
     init();
     console.log('All scripts loaded and executed');
 });
+
+// Contact Form Functionality
+function initializeContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+    
+    console.log('Initializing contact form...');
+    console.log('Contact form element:', contactForm);
+    console.log('Form status element:', formStatus);
+    
+    if (!contactForm) {
+        console.error('Contact form not found!');
+        return;
+    }
+    
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const messageType = formData.get('messageType');
+        const message = formData.get('message');
+        const priority = formData.get('priority');
+        
+        // Validate form
+        if (!messageType || !message.trim()) {
+            showFormStatus('Please fill in all required fields.', 'error');
+            return;
+        }
+        
+        // Show loading state
+        showFormStatus('Sending message...', 'loading');
+        
+        try {
+            // Send to Discord webhook
+            await sendToDiscord(messageType, message, priority);
+            showFormStatus('Message sent successfully! We\'ll get back to you soon.', 'success');
+            contactForm.reset();
+        } catch (error) {
+            console.error('Error sending message:', error);
+            showFormStatus('Failed to send message. Please try again later.', 'error');
+        }
+    });
+}
+
+function showFormStatus(message, type) {
+    const formStatus = document.getElementById('formStatus');
+    if (!formStatus) return;
+    
+    formStatus.textContent = message;
+    formStatus.className = `form-status ${type}`;
+    
+    // Auto-hide success messages after 5 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 5000);
+    }
+}
+
+async function sendToDiscord(messageType, message, priority) {
+    // Discord Webhook URL - Life Alliance Contact Channel
+    const webhookUrl = 'https://discord.com/api/webhooks/1417253678192132199/KZGOlgVOEsB4piTqQ7-RhX2jtvC0lEWCc0v-Io-mkm05vOAvdepMem2EZ3h5WEdUGYw9';
+    
+    // Priority emojis
+    const priorityEmojis = {
+        low: '🟢',
+        medium: '🟡', 
+        high: '🔴'
+    };
+    
+    // Message type emojis
+    const typeEmojis = {
+        join: '🤝',
+        guild: '🏰',
+        event: '🎉',
+        suggestion: '💡',
+        complaint: '⚠️',
+        other: '📝'
+    };
+    
+    const embed = {
+        title: `${typeEmojis[messageType]} New Contact Message`,
+        color: priority === 'high' ? 0xff0000 : priority === 'medium' ? 0xffaa00 : 0x00ff00,
+        fields: [
+            {
+                name: 'Type',
+                value: messageType.charAt(0).toUpperCase() + messageType.slice(1),
+                inline: true
+            },
+            {
+                name: 'Priority',
+                value: `${priorityEmojis[priority]} ${priority.charAt(0).toUpperCase() + priority.slice(1)}`,
+                inline: true
+            },
+            {
+                name: 'Message',
+                value: message,
+                inline: false
+            }
+        ],
+        footer: {
+            text: 'Life Alliance Contact Form',
+            icon_url: 'https://cdn.discordapp.com/attachments/your-icon-url-here'
+        },
+        timestamp: new Date().toISOString()
+    };
+    
+    const payload = {
+        content: `**New anonymous message received!** ${priorityEmojis[priority]}`,
+        embeds: [embed]
+    };
+    
+    const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Discord webhook failed: ${response.status}`);
+    }
+}
+
+// Simple Dofus Time Clock
+function showTime() {
+    const timeElement = document.getElementById('timeDisplay');
+    if (timeElement) {
+        const now = new Date();
+        const parisTime = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Paris"}));
+        
+        const hours = parisTime.getHours().toString().padStart(2, '0');
+        const minutes = parisTime.getMinutes().toString().padStart(2, '0');
+        const seconds = parisTime.getSeconds().toString().padStart(2, '0');
+        
+        timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+}
+
+// Start the clock
+showTime();
+setInterval(showTime, 1000);
+
+// Mobile title visibility
+function toggleMobileTitle() {
+    const mobileTitle = document.querySelector('.mobile-only-title');
+    const desktopTitle = document.querySelector('.hero-title');
+    
+    if (window.innerWidth <= 768) {
+        // Mobile - show mobile title, hide desktop title
+        if (mobileTitle) mobileTitle.style.display = 'block';
+        if (desktopTitle) desktopTitle.style.display = 'none';
+    } else {
+        // Desktop - show desktop title, hide mobile title
+        if (mobileTitle) mobileTitle.style.display = 'none';
+        if (desktopTitle) desktopTitle.style.display = 'block';
+    }
+}
+
+// Run on load and resize
+window.addEventListener('load', toggleMobileTitle);
+window.addEventListener('resize', toggleMobileTitle);
+
+// PWA Installation and Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Life Alliance PWA: Service Worker registered successfully');
+            })
+            .catch((error) => {
+                console.log('Life Alliance PWA: Service Worker registration failed');
+            });
+    });
+}
+
+// PWA Install Prompt
+let deferredPrompt;
+const installButton = document.createElement('button');
+installButton.innerHTML = '📱 Install App';
+installButton.className = 'pwa-install-btn';
+installButton.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #faba62, #ff6b35);
+    color: #1a0f0a;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 4px 15px rgba(250, 186, 98, 0.4);
+    display: none;
+    font-family: 'Cinzel', serif;
+`;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    console.log('Life Alliance PWA: Install prompt available');
+    e.preventDefault();
+    deferredPrompt = e;
+    installButton.style.display = 'block';
+    document.body.appendChild(installButton);
+});
+
+installButton.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`Life Alliance PWA: Install prompt ${outcome}`);
+        deferredPrompt = null;
+        installButton.style.display = 'none';
+    }
+});
+
+// PWA Install Success
+window.addEventListener('appinstalled', () => {
+    console.log('Life Alliance PWA: App installed successfully');
+    installButton.style.display = 'none';
+});
+
+// Offline Detection
+window.addEventListener('online', () => {
+    console.log('Life Alliance PWA: Back online');
+    showNotification('You are back online!', 'success');
+});
+
+window.addEventListener('offline', () => {
+    console.log('Life Alliance PWA: Gone offline');
+    showNotification('You are offline. Some features may be limited.', 'warning');
+});
+
+// Notification Permission
+function requestNotificationPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Life Alliance PWA: Notification permission granted');
+            }
+        });
+    }
+}
+
+// Show notification helper
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `pwa-notification ${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : type === 'warning' ? '#FF9800' : '#2196F3'};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 5px;
+        z-index: 10001;
+        font-family: 'Cinzel', serif;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Request notification permission on first visit
+setTimeout(requestNotificationPermission, 2000);
