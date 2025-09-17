@@ -653,7 +653,7 @@ class LanguageManager {
         
         // Update stats
         const statLabels = document.querySelectorAll('.stat-label');
-        const statTexts = ['guilds', 'members', 'leaders'];
+        const statTexts = ['members', 'guilds', 'leaders'];
         
         statLabels.forEach((label, index) => {
             if (statTexts[index]) {
