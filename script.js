@@ -671,24 +671,108 @@ function initActivityFeed() {
     `).join('');
 }
 
-// Live Ticker
+// Live Ticker (Google Sheet source)
 function initTicker() {
     const track = document.getElementById('tickerTrack');
     if (!track) return;
 
-    const items = [
-        { icon: '<i class="fas fa-people-group"></i>', text: 'New guild joined LIFE Alliance: Sleeping Forest • Level 62 • 33 members', link: { href: '#', label: 'Ankama Page' } },
-        { icon: '<i class="fas fa-trophy"></i>', text: 'The Rise of the Alliance - Winners will be announced on September 25', link: null },
-        { icon: '<i class="fas fa-ticket"></i>', text: 'Weekly Lottery Monday winner: Terro', link: null }
+    // Configure your Google Sheet here
+    const SHEET_ID = '1feQUP1HPPxg0pHkahLxqgVqdcjAJwhTzamfsgm62OfQ';
+    const SHEET_NAME = 'Sheet1'; // Change if you rename the tab
+    const BASE_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(SHEET_NAME)}&tqx=out:json`;
+
+    let lastItems = [];
+
+    function iconForType(type) {
+        switch ((type || '').toLowerCase()) {
+            case 'guild': return '<i class="fas fa-people-group"></i>';
+            case 'event': return '<i class="fas fa-trophy"></i>';
+            case 'lottery': return '<i class="fas fa-ticket"></i>';
+            case 'milestone': return '<i class="fas fa-flag-checkered"></i>';
+            case 'notice': return '<i class="fas fa-bell"></i>';
+            default: return '<i class="fas fa-scroll"></i>';
+        }
+    }
+
+    function render(items) {
+        if (!items || items.length === 0) return;
+        // Duplicate items for a long seamless track
+        const multiplied = items.length < 6 ? [...items, ...items, ...items] : items;
+        track.innerHTML = multiplied.map(it => {
+            const linkHtml = it.link && it.link.href ? ` — <a href="${it.link.href}" target="_blank" rel="noopener">${it.link.label || 'Link'}</a>` : '';
+            return `<span class="ticker-item">${iconForType(it.type)}<span>${it.text}</span>${linkHtml}</span>`;
+        }).join('');
+        // Ensure animation is running after updates
+        track.style.animation = 'none';
+        // Force reflow
+        void track.offsetWidth;
+        track.style.animation = '';
+    }
+
+    function parseGviz(text) {
+        const match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\);/);
+        if (!match) throw new Error('Unexpected GViz response');
+        const json = JSON.parse(match[1]);
+        const table = json.table;
+        const labels = table.cols.map(c => (c.label || '').toLowerCase());
+        // Fallback to fixed column positions if labels are missing
+        const idx = {
+            timestamp: labels.indexOf('timestamp'),
+            type: labels.indexOf('type'),
+            text: labels.indexOf('text'),
+            link: labels.indexOf('link'),
+            label: labels.indexOf('label')
+        };
+        if (idx.timestamp === -1 && idx.type === -1 && idx.text === -1) {
+            idx.timestamp = 0; idx.type = 1; idx.text = 2; idx.link = 3; idx.label = 4;
+        }
+        const rows = (table.rows || []).map(r => (r.c || []).map(cell => cell ? (cell.f || cell.v) : ''));
+        // Map to our item structure and filter out empty texts; skip header row if present
+        const items = rows.map(r => ({
+            timestamp: idx.timestamp >= 0 ? r[idx.timestamp] : '',
+            type: idx.type >= 0 ? r[idx.type] : '',
+            text: idx.text >= 0 ? r[idx.text] : '',
+            link: (idx.link >= 0 && r[idx.link]) ? { href: r[idx.link], label: (idx.label >= 0 ? (r[idx.label] || 'Open') : 'Open') } : null
+        })).filter(it => {
+            const isHeader = String(it.text).toLowerCase() === 'text' || String(it.type).toLowerCase() === 'type';
+            return !isHeader && it.text && typeof it.text === 'string';
+        });
+        // Sort by timestamp desc if present
+        items.sort((a, b) => {
+            const ta = Date.parse(a.timestamp) || 0;
+            const tb = Date.parse(b.timestamp) || 0;
+            return tb - ta;
+        });
+        return items;
+    }
+
+    async function load() {
+        try {
+            const url = `${BASE_URL}&t=${Date.now()}`; // cache-bust
+            const res = await fetch(url, { cache: 'no-store' });
+            const text = await res.text();
+            const items = parseGviz(text);
+            if (items && items.length) {
+                lastItems = items;
+                render(items);
+            } else if (lastItems.length) {
+                render(lastItems);
+            }
+        } catch (err) {
+            console.warn('Ticker fetch error:', err);
+            if (lastItems.length) render(lastItems);
+        }
+    }
+
+    // Initial render with placeholders while first fetch completes
+    const placeholders = [
+        { type: 'notice', text: 'Loading latest updates…' }
     ];
+    render(placeholders);
+    load();
+    setInterval(load, 90000); // refresh every 90s
 
-    // Duplicate items for seamless loop and longer line
-    const multiplied = [...items, ...items, ...items];
-    track.innerHTML = multiplied.map(it => `
-        <span class="ticker-item">${it.icon}<span>${it.text}</span>${it.link ? ` — <a href="${it.link.href}" target="_blank" rel="noopener">${it.link.label}</a>` : ''}</span>
-    `).join('');
-
-    // Restart animation when user scrolls the ticker manually, then resume after 3s
+    // Optional: if ticker viewport is scrollable, pause/resume animation after manual scroll
     const viewport = document.querySelector('.ticker-viewport');
     if (!viewport) return;
     let resumeTimer = null;
@@ -836,7 +920,13 @@ function showTime() {
         const minutes = parisTime.getMinutes().toString().padStart(2, '0');
         const seconds = parisTime.getSeconds().toString().padStart(2, '0');
         
-        timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        // Update the span inside the time display, not the entire element
+        const timeSpan = timeElement.querySelector('span');
+        if (timeSpan) {
+            timeSpan.textContent = `${hours}:${minutes}:${seconds}`;
+        } else {
+            timeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
     }
 }
 

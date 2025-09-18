@@ -694,6 +694,35 @@ html {
 
 /* Dofus Time Clock - Inline Styled */
 
+/* Time Display */
+#timeDisplay {
+    position: fixed !important;
+    top: 100px !important;
+    right: 20px !important;
+    z-index: 9999 !important;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d) !important;
+    color: #faba62 !important;
+    padding: 6px 12px !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    border: 1px solid #faba62 !important;
+    border-radius: 4px !important;
+    font-family: 'Cinzel', serif !important;
+    text-shadow: 0 0 8px rgba(250, 186, 98, 0.5) !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#timeDisplay img {
+    width: 14px !important;
+    height: 14px !important;
+    filter: drop-shadow(0 0 4px rgba(250, 186, 98, 0.5)) !important;
+}
+
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
@@ -3608,6 +3637,48 @@ section {
     border-color: var(--primary-color);
 }
 
+/* Discord Icon Styles for Buttons and Stats */
+.btn-discord-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 8px;
+    filter: brightness(1.2);
+    transition: all 0.3s ease;
+}
+
+.btn:hover .btn-discord-icon {
+    transform: scale(1.1);
+    filter: brightness(1.4) drop-shadow(0 0 8px rgba(250, 185, 98, 0.6));
+}
+
+.discord-stat-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.discord-stat:hover .discord-stat-icon {
+    color: #5865f2;
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 8px rgba(88, 101, 242, 0.6));
+}
+
+.footer-discord-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter: brightness(1.2);
+}
+
+.footer-discord-icon:hover {
+    transform: scale(1.1);
+    filter: brightness(1.4) drop-shadow(0 0 8px rgba(250, 185, 98, 0.6));
+}
+
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
     50% { transform: translateY(-20px); }
@@ -4102,6 +4173,21 @@ section {
         width: 160px;
         height: 160px;
     }
+    
+    .btn-discord-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .discord-stat-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .footer-discord-icon {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -4302,6 +4388,21 @@ section {
     .discord-logo-img {
         width: 120px;
         height: 120px;
+    }
+    
+    .btn-discord-icon {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .discord-stat-icon {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .footer-discord-icon {
+        width: 18px;
+        height: 18px;
     }
     
     .medieval-slogan {
