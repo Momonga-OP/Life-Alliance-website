@@ -2983,16 +2983,7 @@ section {
     font-style: italic;
 }
 
-/* PWA Styles */
-.pwa-install-btn {
-    animation: pulse 2s infinite;
-    transition: all 0.3s ease;
-}
-
-.pwa-install-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(250, 186, 98, 0.6);
-}
+/* PWA Styles - Install button removed to avoid ticker overlap */
 
 @keyframes pulse {
     0% {
@@ -3032,15 +3023,7 @@ section {
     }
 }
 
-/* PWA Install Button Mobile */
-@media (max-width: 768px) {
-    .pwa-install-btn {
-        bottom: 10px;
-        right: 10px;
-        padding: 10px 16px;
-        font-size: 0.9rem;
-    }
-}
+/* PWA Install Button Mobile - Removed */
 
 
 /* Responsive design for leader cards */

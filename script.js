@@ -967,51 +967,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// PWA Install Prompt
-let deferredPrompt;
-const installButton = document.createElement('button');
-installButton.innerHTML = '📱 Install App';
-installButton.className = 'pwa-install-btn';
-installButton.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: linear-gradient(135deg, #faba62, #ff6b35);
-    color: #1a0f0a;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10000;
-    box-shadow: 0 4px 15px rgba(250, 186, 98, 0.4);
-    display: none;
-    font-family: 'Cinzel', serif;
-`;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    console.log('Life Alliance PWA: Install prompt available');
-    e.preventDefault();
-    deferredPrompt = e;
-    installButton.style.display = 'block';
-    document.body.appendChild(installButton);
-});
-
-installButton.addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`Life Alliance PWA: Install prompt ${outcome}`);
-        deferredPrompt = null;
-        installButton.style.display = 'none';
-    }
-});
-
-// PWA Install Success
-window.addEventListener('appinstalled', () => {
-    console.log('Life Alliance PWA: App installed successfully');
-    installButton.style.display = 'none';
-});
+// PWA Install Prompt - Removed as requested to avoid overlap with ticker
 
 // Offline Detection
 window.addEventListener('online', () => {
