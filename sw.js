@@ -1,5 +1,9 @@
 // Life Alliance PWA Service Worker
-const CACHE_NAME = 'life-alliance-v1.0.0';
+// Bump this version on each deploy to force old cache cleanup
+const CACHE_VERSION = 'v1.0.1';
+const CACHE_NAME = `life-alliance-${CACHE_VERSION}`;
+
+// Core assets to pre-cache (fast boot and offline shell)
 const urlsToCache = [
   '/',
   '/index.html',
@@ -43,53 +47,90 @@ const urlsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 ];
 
-// Install event - cache resources
+// Install: pre-cache core and activate immediately
 self.addEventListener('install', event => {
-  console.log('Life Alliance PWA: Installing...');
+  console.log('[SW] Installing', CACHE_NAME);
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Life Alliance PWA: Caching files');
-        return cache.addAll(urlsToCache);
-      })
-      .catch(error => {
-        console.log('Life Alliance PWA: Cache failed', error);
-      })
+      .then(cache => cache.addAll(urlsToCache))
+      .finally(() => self.skipWaiting())
   );
 });
 
-// Fetch event - serve from cache when offline
+// Strategy helpers
+async function networkFirst(request) {
+  try {
+    const fresh = await fetch(request, { cache: 'no-store' });
+    const cache = await caches.open(CACHE_NAME);
+    cache.put(request, fresh.clone());
+    return fresh;
+  } catch (err) {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(request) || await caches.match('/index.html');
+    return cached;
+  }
+}
+
+async function cacheFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  if (cached) return cached;
+  const res = await fetch(request);
+  cache.put(request, res.clone());
+  return res;
+}
+
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  const networkPromise = fetch(request).then(res => {
+    cache.put(request, res.clone());
+    return res;
+  }).catch(() => cached);
+  return cached || networkPromise;
+}
+
+// Fetch: network-first for HTML, cache-first for images, SWR for CSS/JS
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
-      .catch(() => {
-        // If both cache and network fail, show offline page
-        if (event.request.destination === 'document') {
-          return caches.match('/index.html');
-        }
-      })
-  );
+  const { request } = event;
+  const url = new URL(request.url);
+
+  // Handle navigation and HTML
+  const isHTML = request.mode === 'navigate' || (request.destination === 'document') || url.pathname.endsWith('.html');
+  if (isHTML) {
+    event.respondWith(networkFirst(request));
+    return;
+  }
+
+  // Images heavy: cache-first
+  if (request.destination === 'image') {
+    event.respondWith(cacheFirst(request));
+    return;
+  }
+
+  // Fonts and styles/scripts: stale-while-revalidate for snappy loads
+  if (request.destination === 'style' || request.destination === 'script' || request.destination === 'font') {
+    event.respondWith(staleWhileRevalidate(request));
+    return;
+  }
+
+  // Default fallback
+  event.respondWith(staleWhileRevalidate(request));
 });
 
-// Activate event - clean up old caches
+// Activate: clean old caches and take control
 self.addEventListener('activate', event => {
-  console.log('Life Alliance PWA: Activating...');
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Life Alliance PWA: Deleting old cache', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+  console.log('[SW] Activating', CACHE_NAME);
+  event.waitUntil((async () => {
+    const names = await caches.keys();
+    await Promise.all(names.map(n => {
+      if (n !== CACHE_NAME && n.startsWith('life-alliance-')) {
+        console.log('[SW] Deleting old cache', n);
+        return caches.delete(n);
+      }
+    }));
+    await self.clients.claim();
+  })());
 });
 
 // Background sync for offline form submissions
