@@ -68,6 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize new features
     initBreadcrumbNavigation();
     initStickyNavigation();
+
+    // Removed in-page activity feed section
+
+    // Live Ticker
+    initTicker();
     
     // DOM Elements
     const hamburger = document.querySelector('.hamburger');
@@ -624,6 +629,77 @@ document.addEventListener('DOMContentLoaded', function() {
     init();
     console.log('All scripts loaded and executed');
 });
+
+// Live Activity Feed
+function initActivityFeed() {
+    const feed = document.getElementById('activityFeed');
+    if (!feed) return;
+
+    const activities = [
+        {
+            type: 'guild',
+            icon: '<i class="fas fa-people-group"></i>',
+            title: 'New guild joined LIFE Alliance',
+            meta: 'Sleeping Forest • Level 62 • 33 members',
+            link: { href: '#', label: 'Ankama Page' }
+        },
+        {
+            type: 'event',
+            icon: '<i class="fas fa-trophy"></i>',
+            title: 'The Rise of the Alliance - Winners',
+            meta: 'Winners will be announced on September 25',
+            link: null
+        },
+        {
+            type: 'lottery',
+            icon: '<i class="fas fa-ticket"></i>',
+            title: 'Weekly Lottery Winner',
+            meta: 'Monday winner: Terro',
+            link: null
+        }
+    ];
+
+    feed.innerHTML = activities.map(a => `
+        <div class="activity-item">
+            <div class="activity-icon">${a.icon}</div>
+            <div class="activity-content">
+                <div class="activity-title">${a.title}</div>
+                <div class="activity-meta">${a.meta}</div>
+            </div>
+            <div class="activity-link">${a.link ? `<a href="${a.link.href}" target="_blank" rel="noopener">${a.link.label}</a>` : ''}</div>
+        </div>
+    `).join('');
+}
+
+// Live Ticker
+function initTicker() {
+    const track = document.getElementById('tickerTrack');
+    if (!track) return;
+
+    const items = [
+        { icon: '<i class="fas fa-people-group"></i>', text: 'New guild joined LIFE Alliance: Sleeping Forest • Level 62 • 33 members', link: { href: '#', label: 'Ankama Page' } },
+        { icon: '<i class="fas fa-trophy"></i>', text: 'The Rise of the Alliance - Winners will be announced on September 25', link: null },
+        { icon: '<i class="fas fa-ticket"></i>', text: 'Weekly Lottery Monday winner: Terro', link: null }
+    ];
+
+    // Duplicate items for seamless loop and longer line
+    const multiplied = [...items, ...items, ...items];
+    track.innerHTML = multiplied.map(it => `
+        <span class="ticker-item">${it.icon}<span>${it.text}</span>${it.link ? ` — <a href="${it.link.href}" target="_blank" rel="noopener">${it.link.label}</a>` : ''}</span>
+    `).join('');
+
+    // Restart animation when user scrolls the ticker manually, then resume after 3s
+    const viewport = document.querySelector('.ticker-viewport');
+    if (!viewport) return;
+    let resumeTimer = null;
+    viewport.addEventListener('scroll', () => {
+        track.style.animationPlayState = 'paused';
+        if (resumeTimer) clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(() => {
+            track.style.animationPlayState = 'running';
+        }, 3000);
+    }, { passive: true });
+}
 
 // Contact Form Functionality
 function initializeContactForm() {

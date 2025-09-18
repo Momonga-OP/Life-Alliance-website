@@ -188,6 +188,79 @@
     }
 }
 
+/* Activity Feed */
+.activity {
+    position: relative;
+    padding: 80px 0;
+}
+
+.activity .section-stamp {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.activity-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.activity-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(26, 15, 10, 0.6);
+    border: 1px solid rgba(250, 185, 98, 0.35);
+    border-radius: 10px;
+    box-shadow: var(--medieval-shadow);
+}
+
+.activity-icon {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    color: var(--accent-color);
+}
+
+.activity-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.activity-title {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.activity-meta {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.activity-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.activity-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .activity-item {
+        grid-template-columns: auto 1fr;
+        gap: 10px;
+    }
+    .activity-link { display: none; }
+}
+
 /* Tablet optimizations */
 @media (min-width: 481px) and (max-width: 768px) {
     .container {
@@ -624,7 +697,7 @@ html {
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: 30px;
+    bottom: 90px;
     right: 30px;
     width: 50px;
     height: 50px;
@@ -641,7 +714,7 @@ html {
     visibility: hidden;
     transition: all 0.3s ease;
     box-shadow: var(--medieval-shadow);
-    z-index: 1000;
+    z-index: 1200;
 }
 
 .back-to-top:hover {
@@ -856,6 +929,95 @@ html {
     height: 80px;
     gap: 10px;
 }
+
+/* Medieval News Ticker */
+.ticker-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1100;
+    background: linear-gradient(90deg, rgba(90, 14, 5, 0.97), rgba(61, 40, 24, 0.97));
+    border-top: 2px solid rgba(250, 185, 98, 0.5);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.ticker-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 15px;
+}
+
+.ticker-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: #1a0f0a;
+    background: var(--accent-color);
+    border: 2px solid #f5c57f;
+    padding: 4px 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 0 8px rgba(255,255,255,0.35);
+    letter-spacing: 1px;
+}
+
+.ticker-viewport {
+    overflow: hidden;
+}
+
+.ticker-track {
+    display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
+    animation: tickerScroll 140s linear infinite;
+    padding-right: 50vw;
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    padding: 6px 16px;
+    border-right: 1px solid rgba(250, 185, 98, 0.25);
+}
+
+.ticker-item i { color: var(--accent-color); }
+
+.ticker-item a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.ticker-item a:hover { text-decoration: underline; }
+
+@keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
+
+@media (max-width: 768px) {
+    .ticker-inner { padding: 6px 10px; gap: 8px; }
+    .ticker-item { padding: 6px 12px; }
+}
+
+/* Keep ticker visible while scrolling and allow manual scroll */
+.ticker-viewport {
+    overflow: auto;
+    scrollbar-width: thin;
+}
+.ticker-viewport::-webkit-scrollbar { height: 6px; }
+.ticker-viewport::-webkit-scrollbar-thumb {
+    background: rgba(250,185,98,0.5);
+    border-radius: 4px;
+}
+
+/* Pause on hover for readability */
+.ticker-viewport:hover .ticker-track { animation-play-state: paused; }
 
 .nav-logo {
     display: flex;
@@ -1974,7 +2136,7 @@ section {
 
 /* Tooltip for stamp */
 .section-stamp::before {
-    content: 'Solum qui nobiscum steterunt, nobiscum stabunt.';
+    content: 'LIFE ALLIANCE';
     position: absolute;
     top: 50%;
     right: 100%;
@@ -4183,8 +4345,19 @@ section {
         font-size: 1.2rem;
     }
     
-    .medieval-slogan {
+    .alliance-motto {
+        padding: 12px;
+        margin-top: 15px;
+    }
+    
+    .motto-line {
+        font-size: 1rem;
+        letter-spacing: 0.8px;
+    }
+    
+    .motto-accent {
         font-size: 1.2rem;
+        letter-spacing: 1px;
     }
     
     .contact {
