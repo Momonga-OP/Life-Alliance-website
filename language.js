@@ -135,6 +135,13 @@ const languages = {
             title: "Leadership Team",
             description: "Meet the dedicated leaders who guide our alliance",
             flipHint: "Hover to flip",
+            carousel: {
+                prev: "Previous leader",
+                next: "Next leader",
+                goTo: "Go to leader",
+                autoNext: "Auto next in:",
+                userControl: "Click arrows, dots, or swipe to control"
+            },
             candee: {
                 role: "Community Management & Recruitment",
                 desc1: "Hello, I am Can-dee, your next door neighbour cat lady that smells like naphthalene.",
@@ -407,6 +414,13 @@ const languages = {
             title: "Equipo de Liderazgo",
             description: "Conoce a los líderes dedicados que guían nuestra alianza",
             flipHint: "Pasa el cursor para voltear",
+            carousel: {
+                prev: "Líder anterior",
+                next: "Siguiente líder",
+                goTo: "Ir al líder",
+                autoNext: "Siguiente automático en:",
+                userControl: "Haz clic en las flechas, puntos o desliza para controlar"
+            },
             candee: {
                 role: "Gestión de Comunidad y Reclutamiento",
                 desc1: "Hola, soy Can-dee, tu vecina de al lado que es una señora de los gatos que huele a naftalina.",

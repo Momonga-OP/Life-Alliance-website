@@ -61,13 +61,266 @@ function initStickyNavigation() {
     });
 }
 
+
+// Smooth Section Transitions
+function initSmoothTransitions() {
+    const sections = document.querySelectorAll('section');
+    const cards = document.querySelectorAll('.guild-card, .leader-card, .event-card, .feature-card, .phase-item');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+    
+    // Observe all cards with staggered animation
+    cards.forEach((card, index) => {
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100); // Stagger the animation
+                }
+            });
+        }, observerOptions);
+        
+        cardObserver.observe(card);
+    });
+}
+
+// Enhanced Navigation with Smooth Scrolling
+function initEnhancedNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                // Smooth scroll to section
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+}
+
+// 3D Carousel functionality
+function init3DCarousel() {
+    const carousel = document.getElementById('leadersCarousel');
+    if (!carousel) {
+        console.log('Carousel container not found');
+        return;
+    }
+
+    const cards = carousel.querySelectorAll('.carousel-card');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    
+    console.log('Carousel elements found:', {
+        carousel: !!carousel,
+        cards: cards.length,
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+        dots: dots.length
+    });
+    
+    let currentIndex = 0;
+    let isAnimating = false;
+
+    function updateCarousel() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        cards.forEach((card, index) => {
+            const cardIndex = parseInt(card.dataset.index);
+            card.className = 'carousel-card';
+            
+            if (cardIndex === currentIndex) {
+                card.classList.add('active');
+            } else if (cardIndex === (currentIndex + 1) % cards.length) {
+                card.classList.add('next');
+            } else if (cardIndex === (currentIndex - 1 + cards.length) % cards.length) {
+                card.classList.add('prev');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Update dots
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+
+        setTimeout(() => {
+            isAnimating = false;
+        }, 600);
+    }
+
+    // Force initial update
+    function forceUpdate() {
+        cards.forEach((card, index) => {
+            const cardIndex = parseInt(card.dataset.index);
+            card.className = 'carousel-card';
+            
+            if (cardIndex === currentIndex) {
+                card.classList.add('active');
+            } else if (cardIndex === (currentIndex + 1) % cards.length) {
+                card.classList.add('next');
+            } else if (cardIndex === (currentIndex - 1 + cards.length) % cards.length) {
+                card.classList.add('prev');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentIndex);
+        });
+    }
+
+    function nextSlide() {
+        if (isAnimating) return;
+        currentIndex = (currentIndex + 1) % cards.length;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        if (isAnimating) return;
+        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        updateCarousel();
+    }
+
+    function goToSlide(index) {
+        if (isAnimating || index === currentIndex) return;
+        currentIndex = index;
+        updateCarousel();
+    }
+
+
+    // Event listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevSlide);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextSlide);
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+    }
+
+    // Keyboard navigation
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextSlide();
+        }
+    });
+
+    // Make carousel focusable
+    carousel.setAttribute('tabindex', '0');
+
+    // Initialize
+    console.log('Initializing 3D carousel with', cards.length, 'cards');
+    forceUpdate();
+}
+
+// Maintenance Mode Toggle Function
+function toggleMaintenanceMode(show = true) {
+    const overlay = document.getElementById('maintenanceOverlay');
+    if (overlay) {
+        if (show) {
+            overlay.style.display = 'flex';
+            // Prevent body scroll when maintenance mode is active
+            document.body.style.overflow = 'hidden';
+        } else {
+            overlay.style.display = 'none';
+            // Restore body scroll when maintenance mode is disabled
+            document.body.style.overflow = '';
+        }
+    }
+}
+
+// Check for maintenance mode on page load
+function checkMaintenanceMode() {
+    // You can change this to true to enable maintenance mode
+    const maintenanceEnabled = false; // Set to true to enable maintenance mode
+    
+    if (maintenanceEnabled) {
+        toggleMaintenanceMode(true);
+    }
+}
+
+// Easy toggle function for admin use
+// Call toggleMaintenanceMode(true) to enable maintenance mode
+// Call toggleMaintenanceMode(false) to disable maintenance mode
+window.toggleMaintenanceMode = toggleMaintenanceMode;
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing website...');
     
+    // Check maintenance mode on load
+    checkMaintenanceMode();
+    
     // Initialize new features
     initBreadcrumbNavigation();
     initStickyNavigation();
+    initSmoothTransitions();
+    initEnhancedNavigation();
+    init3DCarousel();
 
     // Removed in-page activity feed section
 
@@ -702,7 +955,9 @@ function initTicker() {
             const linkHtml = it.link && it.link.href ? ` — <a href="${it.link.href}" target="_blank" rel="noopener">${it.link.label || 'Link'}</a>` : '';
             return `<span class="ticker-item">${iconForType(it.type)}<span>${it.text}</span>${linkHtml}</span>`;
         }).join('');
-        // Ensure animation is running after updates
+        
+        // Remove loading animation and restore full opacity
+        track.style.opacity = '1';
         track.style.animation = 'none';
         // Force reflow
         void track.offsetWidth;
@@ -769,6 +1024,11 @@ function initTicker() {
         { type: 'notice', text: 'Loading latest updates…' }
     ];
     render(placeholders);
+    
+    // Add loading animation to ticker
+    track.style.opacity = '0.7';
+    track.style.animation = 'pulse 1.5s ease-in-out infinite';
+    
     load();
     setInterval(load, 90000); // refresh every 90s
 

@@ -45,6 +45,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Maintenance Mode Overlay -->
+    <div id="maintenanceOverlay" class="maintenance-overlay" style="display: none;">
+        <div class="maintenance-content">
+            <div class="maintenance-logo">
+                <img src="Logos/Alliance logo.png" alt="Life Alliance Logo" class="maintenance-logo-img">
+            </div>
+            <h1 class="maintenance-title">Hey This Website is Disabled for Now</h1>
+            <p class="maintenance-message">Thank you for your visit</p>
+            <div class="maintenance-decoration">
+                <div class="medieval-border-top"></div>
+                <div class="medieval-border-bottom"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Medieval Particles -->
     <div class="medieval-particles" id="medievalParticles"></div>
     
@@ -434,18 +449,34 @@
         <div class="section-stamp"></div>
         <div class="container">
             <h2 class="section-title" data-translate="leaders.title">Alliance Leadership</h2>
-            <div class="leaders-grid">
-                <!-- Can-dee -->
-                <div class="leader-card">
-                    <div class="leader-card-inner">
-                        <div class="leader-card-front">
-                            <img src="Leaders/Candee.png" alt="Can-dee" class="leader-image">
-                            <h3 class="leader-name">Can-dee</h3>
-                            <p class="leader-role" data-translate="leaders.candee.role">Community Management & Recruitment</p>
-                            <div class="flip-hint" data-translate="leaders.flipHint">Hover to flip</div>
+            
+            <!-- 3D Carousel -->
+            <div class="three-d-carousel" id="leadersCarousel">
+                <div class="carousel-container">
+                    <!-- Latif (Cunyee) - Alliance Leader First -->
+                    <div class="carousel-card" data-index="0">
+                        <div class="carousel-card-inner">
+                            <div class="carousel-card-image" style="background-image: url('Leaders/Cunyee.png')"></div>
+                            <div class="carousel-card-content">
+                                <h3 class="carousel-card-title">Latif (Momonga)</h3>
+                                <p class="carousel-card-role" data-translate="leaders.latif.role">Alliance Leader</p>
+                                <div class="carousel-card-description">
+                                    <p data-translate="leaders.latif.desc1">Hello everyone, I'm Latif, though most of you probably know me better as Momonga.</p>
+                                    <p data-translate="leaders.latif.desc2">I started on Dofus Touch I'm not as much of a veteran as some of the others, used to lead a guild called Moroclan now im the leader of Sparta guild.</p>
+                                    <p data-translate="leaders.latif.desc3">In LIFE, I serve as the Alliance Leader. I'll be honest: I'm not the best at PvM or PvP, and I don't play as much these days as I used to.</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="leader-card-back">
-                            <div class="leader-description">
+                    </div>
+
+                    <!-- Can-dee -->
+                    <div class="carousel-card" data-index="1">
+                        <div class="carousel-card-inner">
+                            <div class="carousel-card-image" style="background-image: url('Leaders/Candee.png')"></div>
+                            <div class="carousel-card-content">
+                                <h3 class="carousel-card-title">Can-dee</h3>
+                                <p class="carousel-card-role" data-translate="leaders.candee.role">Community Management & Recruitment</p>
+                                <div class="carousel-card-description">
                                 <p data-translate="leaders.candee.desc1">Hello, I am Can-dee, your next door neighbour cat lady that smells like naphthalene.</p>
                                 <p data-translate="leaders.candee.desc2">I have been playing dofus back in 2009 (pls dont try guessing my age) and Touch since 2017.</p>
                                 <p data-translate="leaders.candee.desc3">In game I have done everything from leading alliances, going to war, hosting events, creating communities to quiting and coming back 69 times and counting.</p>
@@ -457,16 +488,13 @@
                 </div>
 
                 <!-- Zubic-Vila -->
-                <div class="leader-card">
-                    <div class="leader-card-inner">
-                        <div class="leader-card-front">
-                            <img src="Leaders/Zubic-vila.png" alt="Zubic-Vila" class="leader-image">
-                            <h3 class="leader-name">Zubic-Vila</h3>
-                            <p class="leader-role" data-translate="leaders.zubic.role">Voice of Life</p>
-                            <div class="flip-hint" data-translate="leaders.flipHint">Hover to flip</div>
-                        </div>
-                        <div class="leader-card-back">
-                            <div class="leader-description">
+                    <div class="carousel-card" data-index="2">
+                        <div class="carousel-card-inner">
+                            <div class="carousel-card-image" style="background-image: url('Leaders/Zubic-vila.png')"></div>
+                            <div class="carousel-card-content">
+                                <h3 class="carousel-card-title">Zubic-Vila</h3>
+                                <p class="carousel-card-role" data-translate="leaders.zubic.role">Voice of Life</p>
+                                <div class="carousel-card-description">
                                 <p data-translate="leaders.zubic.desc1">Heya! I'm Zubic-Vila</p>
                                 <p data-translate="leaders.zubic.desc2">Been casting spells and chasing quests since 2007 on good ol' Rushu. Took a few long naps but came back swinging in Dofus Touch on Dodge around 2020.</p>
                                 <p data-translate="leaders.zubic.desc3">Joined Soul, climbed the ranks like a true gobball whisperer, and ended up leading the guild! In 2024, we merged into Guardians, and now I'm the proud second-in-command. My current role in the leadership team is being the "Voice of Life" — aka the one annoying everyone with announcements, reminders, and stuff to read. If it pops up in alliance chat and sounds suspiciously organized... yeah, that might be me...</p>
@@ -477,16 +505,13 @@
                 </div>
 
                 <!-- Boriss -->
-                <div class="leader-card">
-                    <div class="leader-card-inner">
-                        <div class="leader-card-front">
-                            <img src="Leaders/Boriss.png" alt="Boriss" class="leader-image">
-                            <h3 class="leader-name">Boriss</h3>
-                            <p class="leader-role" data-translate="leaders.boriss.role">Guild Recruitment & Strategy</p>
-                            <div class="flip-hint" data-translate="leaders.flipHint">Hover to flip</div>
-                        </div>
-                        <div class="leader-card-back">
-                            <div class="leader-description">
+                    <div class="carousel-card" data-index="3">
+                        <div class="carousel-card-inner">
+                            <div class="carousel-card-image" style="background-image: url('Leaders/Boriss.png')"></div>
+                            <div class="carousel-card-content">
+                                <h3 class="carousel-card-title">Boriss</h3>
+                                <p class="carousel-card-role" data-translate="leaders.boriss.role">Guild Recruitment & Strategy</p>
+                                <div class="carousel-card-description">
                                 <p data-translate="leaders.boriss.desc1">Hello my name is Boriss and I started playing Dofus during the beta on PC, used to play on Rushu and was one the first people crazy enough to reach level 200.</p>
                                 <p data-translate="leaders.boriss.desc2">After many breaks im back on Dodge and used to have a own guild and lead this alliance. After A while we decided to merge with Guardians since Dodge was dead.</p>
                                 <p data-translate="leaders.boriss.desc3">I enjoy PvP and PvM (Besides Wind dojo, fuck that place). My current role in the leaderteam is getting new guilds in and trying to be funny once in a while.</p>
@@ -496,41 +521,34 @@
                 </div>
 
                 <!-- Terro -->
-                <div class="leader-card">
-                    <div class="leader-card-inner">
-                        <div class="leader-card-front">
-                            <img src="Leaders/Terro.png" alt="Terro" class="leader-image">
-                            <h3 class="leader-name">Terro</h3>
-                            <p class="leader-role" data-translate="leaders.terro.role">Leadership Team</p>
-                            <div class="flip-hint" data-translate="leaders.flipHint">Hover to flip</div>
-                        </div>
-                        <div class="leader-card-back">
-                            <div class="leader-description">
+                    <div class="carousel-card" data-index="4">
+                        <div class="carousel-card-inner">
+                            <div class="carousel-card-image" style="background-image: url('Leaders/Terro.png')"></div>
+                            <div class="carousel-card-content">
+                                <h3 class="carousel-card-title">Terro</h3>
+                                <p class="carousel-card-role" data-translate="leaders.terro.role">Leadership Team</p>
+                                <div class="carousel-card-description">
                                 <p data-translate="leaders.terro.desc1">Terro's profile coming soon...</p>
                                 <p data-translate="leaders.terro.desc2">Stay tuned for more information about this amazing leader!</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Cunyee -->
-                <div class="leader-card">
-                    <div class="leader-card-inner">
-                        <div class="leader-card-front">
-                            <img src="Leaders/Cunyee.png" alt="Latif (Momonga)" class="leader-image">
-                            <h3 class="leader-name">Latif (Momonga)</h3>
-                            <p class="leader-role" data-translate="leaders.latif.role">Alliance Leader</p>
-                            <div class="flip-hint" data-translate="leaders.flipHint">Hover to flip</div>
-                        </div>
-                        <div class="leader-card-back">
-                            <div class="leader-description">
-                                <p data-translate="leaders.latif.desc1">Hello everyone, I'm Latif, though most of you probably know me better as Momonga.</p>
-                                <p data-translate="leaders.latif.desc2">I started on Dofus Touch I'm not as much of a veteran as some of the others, used to lead a guild called Moroclan now im the leader of Sparta guild.</p>
-                                <p data-translate="leaders.latif.desc3">In LIFE, I serve as the Alliance Leader. I'll be honest: I'm not the best at PvM or PvP, and I don't play as much these days as I used to.</p>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Navigation -->
+                <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous leader">←</button>
+                <button class="carousel-nav next" id="carouselNext" aria-label="Next leader">→</button>
+
+                <!-- Dots -->
+                <div class="carousel-dots" id="carouselDots">
+                    <button class="carousel-dot active" data-index="0" aria-label="Go to leader 1"></button>
+                    <button class="carousel-dot" data-index="1" aria-label="Go to leader 2"></button>
+                    <button class="carousel-dot" data-index="2" aria-label="Go to leader 3"></button>
+                    <button class="carousel-dot" data-index="3" aria-label="Go to leader 4"></button>
+                    <button class="carousel-dot" data-index="4" aria-label="Go to leader 5"></button>
                 </div>
+
             </div>
         </div>
     </section>
