@@ -296,7 +296,7 @@ function toggleMaintenanceMode(show = true) {
 // Check for maintenance mode on page load
 function checkMaintenanceMode() {
     // You can change this to true to enable maintenance mode
-    const maintenanceEnabled = flase; // Set to true to enable maintenance mode
+    const maintenanceEnabled = true; // Set to true to enable maintenance mode
     
     if (maintenanceEnabled) {
         toggleMaintenanceMode(true);
