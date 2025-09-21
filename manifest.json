@@ -1,0 +1,61 @@
+{
+  "name": "Life Alliance - Dofus Touch",
+  "short_name": "Life Alliance",
+  "description": "The Biggest English Speaking Alliance in Dofus Touch Blair Server",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a0f0a",
+  "theme_color": "#faba62",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["games", "entertainment", "social"],
+  "icons": [
+    {
+      "src": "Logos/Alliance logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Logos/Alliance logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "Logos/Alliance logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Join Discord",
+      "short_name": "Discord",
+      "description": "Join our Discord server",
+      "url": "#contact",
+      "icons": [
+        {
+          "src": "Logos/Alliance logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "View Guilds",
+      "short_name": "Guilds",
+      "description": "Browse our guilds",
+      "url": "#guilds",
+      "icons": [
+        {
+          "src": "Logos/Alliance logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
