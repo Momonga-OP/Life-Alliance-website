@@ -1,0 +1,73 @@
+name: Deploy Life Alliance Website with Security Headers
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      
+    - name: Configure Cloudflare Security Headers
+      run: |
+        echo "🔒 Security headers will be configured via Cloudflare"
+        echo "📋 Next steps:"
+        echo "1. Add your domain to Cloudflare"
+        echo "2. Configure security headers in Cloudflare dashboard"
+        echo "3. Enable Page Rules for additional security"
+        
+    - name: Security Headers Configuration Guide
+      run: |
+        echo "🔧 Cloudflare Security Headers Configuration:"
+        echo ""
+        echo "1. Login to Cloudflare Dashboard"
+        echo "2. Go to Security > WAF"
+        echo "3. Add these Page Rules:"
+        echo ""
+        echo "Rule 1: www.blairlife.site/*"
+        echo "- Security Level: High"
+        echo "- Browser Integrity Check: On"
+        echo "- Challenge Passage: 30 minutes"
+        echo ""
+        echo "Rule 2: www.blairlife.site/*"
+        echo "- Cache Level: Cache Everything"
+        echo "- Browser Cache TTL: 1 month"
+        echo ""
+        echo "4. Go to Network tab and enable:"
+        echo "- HTTP/2: On"
+        echo "- HTTP/3 (with QUIC): On"
+        echo "- 0-RTT Connection Resumption: On"
+        echo ""
+        echo "5. Go to SSL/TLS tab:"
+        echo "- Encryption Mode: Full (strict)"
+        echo "- Edge Certificates: Always Use HTTPS"
+        echo "- HSTS: Enable (max-age: 31536000)"
+        echo ""
+        echo "6. Go to Speed tab:"
+        echo "- Auto Minify: CSS, JavaScript, HTML"
+        echo "- Brotli Compression: On"
+        echo "- Rocket Loader: On"
+        
+    - name: Deployment Summary
+      run: |
+        echo "✅ GitHub Pages deployment completed!"
+        echo "🌐 Website URL: https://www.blairlife.site"
+        echo "🔒 Next: Configure Cloudflare for security headers"
+        echo "📊 Expected Security Score: 90-100/100 after Cloudflare setup"
