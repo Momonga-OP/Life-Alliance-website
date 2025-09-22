@@ -2175,7 +2175,7 @@ section.visible {
 .hero-server {
     font-size: 1.4rem;
     color: var(--accent-color);
-    margin-bottom: 50px;
+    margin-bottom: 12px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -2197,14 +2197,14 @@ section.visible {
     display: flex;
     justify-content: center;
     gap: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
     perspective: 1000px;
 }
 
 .stat {
     text-align: center;
     background: rgba(91, 14, 5, 0.4);
-    padding: 12px 18px;
+    padding: 8px 14px;
     border-radius: 12px;
     border: 2px solid var(--accent-color);
     box-shadow: 
