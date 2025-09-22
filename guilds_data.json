@@ -50,11 +50,6 @@
     "logo": "Guilds logo and names/Italians.png"
   },
   {
-    "name": "Krosmic Fluxx",
-    "members": 234,
-    "logo": "Guilds logo and names/Krosmic Fluxx.png"
-  },
-  {
     "name": "Nemesis",
     "members": 166,
     "logo": "Guilds logo and names/Nemesis.png"
@@ -75,11 +70,6 @@
     "logo": "Guilds logo and names/Punishment.png"
   },
   {
-    "name": "SAQ SELECTION",
-    "members": 47,
-    "logo": "Guilds logo and names/SAQ SELECTION.png"
-  },
-  {
     "name": "Sausage Fingers Society",
     "members": 94,
     "logo": "Guilds logo and names/Sausage Fingers Society.png"
@@ -90,16 +80,6 @@
     "logo": "Guilds logo and names/sparta logoo.png"
   },
   {
-    "name": "The Trenches",
-    "members": 35,
-    "logo": "Guilds logo and names/The Trenches.png"
-  },
-  {
-    "name": "Thieves",
-    "members": 244,
-    "logo": "Guilds logo and names/Thieves.png"
-  },
-  {
     "name": "Tight",
     "members": 132,
     "logo": "Guilds logo and names/Tight.png"
@@ -108,5 +88,40 @@
     "name": "Vendetta",
     "members": 182,
     "logo": "Guilds logo and names/Vendetta.png"
+  },
+  {
+    "name": "Sleeping Forest",
+    "members": 33,
+    "logo": "Guilds logo and names/Sleeping Forest.png"
+  },
+  {
+    "name": "Rzeczpospolita Polska",
+    "members": 64,
+    "logo": "Guilds logo and names/Polska.png"
+  },
+  {
+    "name": "Avaricia",
+    "members": 61,
+    "logo": "Guilds logo and names/Avaricia.png"
+  },
+  {
+    "name": "All-Thamen",
+    "members": 69,
+    "logo": "Guilds logo and names/All-Thamen.png"
+  },
+  {
+    "name": "Kings OF DestinyS",
+    "members": 81,
+    "logo": "Guilds logo and names/Kings OF DestinyS.png"
+  },
+  {
+    "name": "S u p r e m a c y",
+    "members": 9,
+    "logo": "Guilds logo and names/S u p r e m a c y.png"
+  },
+  {
+    "name": "-YouTube-",
+    "members": 171,
+    "logo": "Guilds logo and names/-YouTube-.png"
   }
 ]

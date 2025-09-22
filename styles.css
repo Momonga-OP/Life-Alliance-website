@@ -2871,14 +2871,16 @@ section {
 }
 
 .guild-logo-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 15px;
-    border-radius: 50%;
-    object-fit: cover;
+    border-radius: 12px;
+    object-fit: contain;
     border: 2px solid var(--accent-color);
     box-shadow: var(--medieval-shadow);
     transition: all 0.3s ease;
+    background: rgba(26, 15, 10, 0.8);
+    padding: 4px;
 }
 
 .guild-logo-img:hover {
@@ -4946,8 +4948,8 @@ section {
     
     .guild-logo-img,
     .guild-logo {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
     }
     
     .leader-avatar {
