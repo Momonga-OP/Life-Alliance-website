@@ -257,6 +257,13 @@
         gap: 4px;
     }
     
+    #languageSelect {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+        min-width: 70px;
+        border-width: 1.5px;
+    }
+    
     .nav-menu {
         gap: 6px;
     }
@@ -272,6 +279,13 @@
     .language-switcher {
         margin-left: 4px;
         gap: 4px;
+    }
+    
+    #languageSelect {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        min-width: 64px;
+        border-width: 1.5px;
     }
     
     .nav-menu {
@@ -2776,6 +2790,29 @@ section {
     gap: 20px;
     justify-content: center;
 }
+
+/* Guild Modal */
+.guild-modal { 
+    position: fixed; inset: 0; display: none; align-items: center; justify-content: center; 
+    z-index: 10000; 
+}
+.guild-modal.active { display: flex; }
+.guild-modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(2px); }
+.guild-modal-content { 
+    position: relative; background: linear-gradient(135deg, #1a0f0a, #2b1a13); border: 2px solid var(--accent-color);
+    border-radius: 14px; padding: 16px; box-shadow: 0 25px 80px rgba(0,0,0,0.7), 0 0 0 2px rgba(250,186,98,0.2) inset;
+    transform: perspective(900px) rotateX(12deg) scale(0.85); opacity: 0;
+    transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
+}
+.guild-modal.active .guild-modal-content { transform: perspective(900px) rotateX(0deg) scale(1); opacity: 1; }
+.guild-modal-image { display: block; max-width: min(80vw, 520px); max-height: min(70vh, 520px); object-fit: contain; filter: drop-shadow(0 12px 30px rgba(0,0,0,.6)); }
+.guild-modal-caption { margin-top: 10px; text-align: center; color: var(--accent-color); font-family: 'Cinzel', serif; }
+.guild-modal-close { position: absolute; top: 6px; right: 8px; background: transparent; color: var(--accent-color); border: none; font-size: 28px; cursor: pointer; }
+
+/* Make guild cards clickable */
+.guild-card { cursor: pointer; }
+.guild-card .guild-logo-img { transition: transform .25s ease; }
+.guild-card:hover .guild-logo-img { transform: translateY(-4px) scale(1.02); }
 
 .guild-card {
     background: rgba(91, 14, 5, 0.3);

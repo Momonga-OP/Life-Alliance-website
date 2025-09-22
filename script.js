@@ -520,8 +520,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Animate counters when they come into view
                 if (entry.target.classList.contains('hero-stats')) {
-                    animateCounter(document.getElementById('memberCount'), 3100);
-                    animateCounter(document.getElementById('guildCount'), 18);
+                    animateCounter(document.getElementById('memberCount'), 3511);
+                    animateCounter(document.getElementById('guildCount'), 25);
                     // Start dynamic online counter instead of fixed value
                     startDynamicOnlineCounter();
                 }
@@ -819,6 +819,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 nebula.style.transform = `translateY(${scrolled * 0.3}px)`;
             }
         });
+
+        // Guild modal interactions
+        const guildCards = document.querySelectorAll('.guild-card');
+        const guildModal = document.getElementById('guildModal');
+        const guildModalImg = document.getElementById('guildModalImage');
+        const guildModalCaption = document.getElementById('guildModalCaption');
+        const guildModalClose = document.querySelector('.guild-modal-close');
+        const guildModalBackdrop = document.querySelector('.guild-modal-backdrop');
+
+        function openGuildModal(src, caption) {
+            if (!guildModal || !guildModalImg) return;
+            guildModalImg.src = src;
+            if (guildModalCaption) guildModalCaption.textContent = caption || '';
+            guildModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGuildModal() {
+            if (!guildModal) return;
+            guildModal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (guildModalImg) guildModalImg.src = '';
+        }
+
+        guildCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img.guild-logo-img');
+                const name = card.querySelector('.guild-name')?.textContent?.trim() || 'Guild';
+                if (img && img.getAttribute('src')) {
+                    openGuildModal(img.getAttribute('src'), name);
+                }
+            });
+        });
+
+        if (guildModalClose) guildModalClose.addEventListener('click', closeGuildModal);
+        if (guildModalBackdrop) guildModalBackdrop.addEventListener('click', closeGuildModal);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGuildModal(); });
     }
 
     // Add CSS animations
