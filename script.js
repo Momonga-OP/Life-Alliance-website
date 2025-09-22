@@ -520,8 +520,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Animate counters when they come into view
                 if (entry.target.classList.contains('hero-stats')) {
-                    animateCounter(document.getElementById('memberCount'), 3595);
-                    animateCounter(document.getElementById('guildCount'), 22);
+                    animateCounter(document.getElementById('memberCount'), 3100);
+                    animateCounter(document.getElementById('guildCount'), 18);
                     // Start dynamic online counter instead of fixed value
                     startDynamicOnlineCounter();
                 }
