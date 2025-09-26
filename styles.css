@@ -3784,6 +3784,33 @@ section {
     gap: 40px;
 }
 
+/* Event winners gallery */
+.event-winners {
+    margin-top: 16px;
+}
+.winners-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+}
+.winners-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.winner-card { background: rgba(26, 15, 10, 0.6); border: 1px solid var(--accent-color); border-radius: 10px; overflow: hidden; }
+.winner-card-header { background: rgba(250,186,98,0.12); color: var(--accent-color); padding: 10px 12px; font-weight: 700; font-family: 'Cinzel', serif; }
+.responsive-table { width: 100%; overflow-x: auto; }
+.winners-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.winners-table th, .winners-table td { padding: 10px 12px; border-bottom: 1px solid rgba(250, 186, 98, 0.25); white-space: nowrap; }
+.winners-table thead th { position: sticky; top: 0; background: rgba(26, 15, 10, 0.9); color: var(--accent-color); }
+.winners-table tbody tr:nth-child(even) { background: rgba(250,186,98,0.06); }
+.winners-table tbody tr:hover { background: rgba(250,186,98,0.12); }
+.winners-note {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) { .winners-cards { grid-template-columns: 1fr; } }
+
 .event-card {
     background: rgba(91, 14, 5, 0.4);
     border: 2px solid var(--accent-color);

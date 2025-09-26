@@ -856,6 +856,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (guildModalClose) guildModalClose.addEventListener('click', closeGuildModal);
         if (guildModalBackdrop) guildModalBackdrop.addEventListener('click', closeGuildModal);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGuildModal(); });
+
+        // Enable click-to-enlarge for event winners images
+        document.querySelectorAll('.event-winner-img').forEach(img => {
+            img.addEventListener('click', () => {
+                const caption = img.closest('.winner-card')?.querySelector('.winner-caption')?.textContent || 'Event Winners';
+                openGuildModal(img.getAttribute('src'), caption);
+            });
+        });
     }
 
     // Add CSS animations

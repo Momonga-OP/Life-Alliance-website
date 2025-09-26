@@ -188,11 +188,11 @@ const languages = {
                 status: "Ongoing"
             },
             event2: {
-                date: "Every Friday at 21:00 (Dofus Time)",
-                title: "Weekly Lottery Event",
-                description: "Every Friday at 21:00 (Dofus time), our Discord bot will post a message in the server. All you need to do is react with a ✅ and you're in! The bot will randomly pick a winner shortly after. Prizes range from 1mk to 100mk!",
-                download: "Download Lottery Rules (PDF)",
-                status: "Ongoing"
+                date: "Sunday, September 28th, 2025 at 21:00 (Dofus Time)",
+                title: "LIFE vs INT Alliance - PvP Tournament",
+                description: "Prepare for an epic showdown! This Sunday at 9:00 PM (Dofus time), LIFE Alliance faces off against INT Alliance in an intense 4 vs 4 PvP tournament. Witness the clash of titans as our best warriors compete for glory and honor. Join us in Discord to cheer on our champions!",
+                watch: "Join Discord to Watch",
+                status: "Upcoming"
             },
             event3: {
                 date: "Daily",
@@ -467,11 +467,11 @@ const languages = {
                 status: "En Curso"
             },
             event2: {
-                date: "Cada Viernes a las 21:00 (Hora de Dofus)",
-                title: "Evento de Lotería Semanal",
-                description: "Cada viernes a las 21:00 (hora de Dofus), nuestro bot de Discord publicará un mensaje en el servidor. ¡Todo lo que necesitas hacer es reaccionar con un ✅ y estás dentro! El bot elegirá aleatoriamente un ganador poco después. ¡Los premios van desde 1mk hasta 100mk!",
-                download: "Descargar Reglas de Lotería (PDF)",
-                status: "En Curso"
+                date: "Domingo, 28 de Septiembre, 2025 a las 21:00 (Hora de Dofus)",
+                title: "LIFE vs INT Alliance - Torneo PvP",
+                description: "¡Prepárate para un enfrentamiento épico! Este domingo a las 9:00 PM (hora de Dofus), LIFE Alliance se enfrenta contra INT Alliance en un intenso torneo PvP 4 vs 4. ¡Presencia el choque de titanes mientras nuestros mejores guerreros compiten por gloria y honor. ¡Únete a nosotros en Discord para animar a nuestros campeones!",
+                watch: "Únete a Discord para Ver",
+                status: "Próximo"
             },
             event3: {
                 date: "Diario",
@@ -746,11 +746,11 @@ const languages = {
                 status: "En Cours"
             },
             event2: {
-                date: "Chaque Vendredi à 21:00 (Heure de Dofus)",
-                title: "Événement de Loterie Hebdomadaire",
-                description: "Chaque vendredi à 21:00 (heure de Dofus), notre bot Discord publiera un message sur le serveur. Tout ce que vous devez faire est de réagir avec un ✅ et vous êtes dedans ! Le bot choisira aléatoirement un gagnant peu après. Les prix vont de 1mk à 100mk !",
-                download: "Télécharger les Règles de Loterie (PDF)",
-                status: "En Cours"
+                date: "Dimanche, 28 Septembre, 2025 à 21:00 (Heure de Dofus)",
+                title: "LIFE vs INT Alliance - Tournoi PvP",
+                description: "Préparez-vous pour un affrontement épique ! Ce dimanche à 21h00 (heure de Dofus), l'Alliance VIE affronte l'Alliance INT dans un intense tournoi PvP 4 vs 4. Assistez au choc des titans alors que nos meilleurs guerriers se battent pour la gloire et l'honneur. Rejoignez-nous sur Discord pour encourager nos champions !",
+                watch: "Rejoindre Discord pour Regarder",
+                status: "À Venir"
             },
             event3: {
                 date: "Quotidien",
